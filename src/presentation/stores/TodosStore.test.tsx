@@ -18,7 +18,21 @@ describe('test app', ()=> {
         expect(todosStore.inputTodoValue).toBe('third');
     });
 
-    it('add todo', ()=>{
+    it('check new correct todo', ()=>{
+        render(<App/>);
+        const newTodoNameInput = screen.getByPlaceholderText('type todo name');
+        fireEvent.change(newTodoNameInput, {
+            target: {value: 'first'}
+        });
+        const addTodoButton = screen.getByText('Добавить');
+        expect(addTodoButton).toBeInTheDocument();
+        fireEvent.click(screen.getByText('Добавить'));
+        let isRepeatedTodo = todosStore.isNewTodoCorrect('first');
+        let isEmptyTodo = todosStore.isNewTodoCorrect('');
+        expect(isEmptyTodo && isRepeatedTodo).toBe(false);
+    });
+
+    it('check todo is added', ()=>{
         render(<App/>);
         const newTodoNameInput = screen.getByPlaceholderText('type todo name');
         fireEvent.change(newTodoNameInput, {

@@ -9,6 +9,7 @@ class TodosStore {
     ];
     inputTodoValue: string = "";
     bottomNavValue = 0;
+    addTodoError = "";
     
     constructor(){
         makeAutoObservable(this)
@@ -22,6 +23,13 @@ class TodosStore {
     }
 
     addTodo = () => {
+        this.addTodoError = "";
+
+        if(!this.isNewTodoCorrect(this.inputTodoValue)){
+            this.addTodoError = "todo is already added or empty";
+            return;
+        }
+
         this.todoItems.push({
             name: this.inputTodoValue,
             isCompleted: false,
@@ -73,6 +81,18 @@ class TodosStore {
                     else{item.show = true}
                 }
             );
+        }
+    }
+
+    isNewTodoCorrect(todoName: string): boolean {
+        let findedTodo = this.todoItems.find(item =>
+            item.name === todoName
+        );
+        if(findedTodo !== undefined || todoName === ""){
+            return false;
+        }
+        else{
+            return true;
         }
     }
 
