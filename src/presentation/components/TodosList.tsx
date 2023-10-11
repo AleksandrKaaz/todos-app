@@ -2,23 +2,15 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { observer } from 'mobx-react-lite';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { useSelector } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useDispatch } from 'react-redux';
-import { TodoAction, TodoActionTypes } from '../../types/todo';
-import { Dispatch } from 'redux';
+import { useActions } from '../../hooks/useActions';
 
 const TodosList = () => {
-    const dispatch: Dispatch<TodoAction> = useDispatch();
+    const { switchComplete } = useActions();
     const { todos } = useTypedSelector(state => state.todo);
-
-    const switchComplete = (name: string) => {
-        dispatch({ type: TodoActionTypes.SWITCH_COMPLETE, payload: name });
-    }
 
     return (
         <List sx={{width: '100%', borderTop: '1px dotted'}}>
@@ -42,4 +34,4 @@ const TodosList = () => {
     )
 }
 
-export default observer(TodosList);
+export default TodosList;

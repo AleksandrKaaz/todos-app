@@ -1,26 +1,13 @@
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-// import { todosStore } from '../stores/TodosStore';
 import Button from '@mui/material/Button';
-import { observer } from 'mobx-react-lite';
-import { Typography } from '@mui/material';
-import { Dispatch } from 'redux';
-import { TodoAction, TodoActionTypes } from '../../types/todo';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
 
 const AddTodo = () => {
-    const dispatch: Dispatch<TodoAction> = useDispatch();
+    const { addTodo, inputTodoChange } = useActions();
     const { inputTodoValue } = useTypedSelector(state => state.todo);
 
-    const inputTodoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch({ type: TodoActionTypes.INPUT_TODO_CHANGE, payload: event.target.value });
-    }
-
-    const addTodo = () => {
-        dispatch({ type: TodoActionTypes.ADD_TODO });
-    }
-    
   return (
     <>
         <Box
@@ -58,4 +45,4 @@ const AddTodo = () => {
   )
 }
 
-export default observer(AddTodo);
+export default AddTodo;

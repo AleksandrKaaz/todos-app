@@ -1,28 +1,16 @@
 import Typography from '@mui/material/Typography';
-import { observer } from 'mobx-react-lite';
-// import { todosStore } from '../stores/TodosStore';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { BottomMenuButtons } from '../../enums/BottomMenuButtons';
-import { useDispatch } from 'react-redux';
-import { TodoAction, TodoActionTypes } from '../../types/todo';
-import { Dispatch } from 'redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
 
 const BottomLine = () => {
-    const dispatch: Dispatch<TodoAction> = useDispatch();
+    const { bottomNavigationChange, clearCompleted } = useActions();
     const { bottomNavValue, itemsLeft } = useTypedSelector(state => state.todo);
 
-    const bottomNavigationChange = (newValue: number) => {
-        dispatch({ type: TodoActionTypes.BOTTOM_NAVIGATION_CHANGE, payload: newValue });
-    }
-
-    const clearCompleted = () => {
-        dispatch({ type: TodoActionTypes.CLEAR_COMPLETED });
-    }
-    
     return (
         <Box
             width={'100%'}
@@ -55,4 +43,4 @@ const BottomLine = () => {
     )
 }
 
-export default observer(BottomLine);
+export default BottomLine;

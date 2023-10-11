@@ -1,5 +1,4 @@
 import Typography from '@mui/material/Typography';
-import { observer } from 'mobx-react-lite';
 import Box from '@mui/material/Box';
 import AddTodo from './AddTodo';
 import TodosList from './TodosList';
@@ -22,4 +21,4 @@ const Todos = () => {
   )
 }
 
-export default observer(Todos);
+export default Todos;
