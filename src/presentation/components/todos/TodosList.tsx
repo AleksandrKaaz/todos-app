@@ -5,8 +5,8 @@ import ListItemText from '@mui/material/ListItemText';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useActions } from '../../../hooks/useActions';
 
 const TodosList = () => {
     const { switchComplete } = useActions();
