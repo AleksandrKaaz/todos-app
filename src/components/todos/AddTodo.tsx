@@ -20,7 +20,9 @@ const AddTodo = () => {
             <TextField
                 placeholder="type todo name"
                 value={todos.inputTodoValue}
-                onChange={()=>dispatch(inputTodoChange)}
+                onChange={(event) => {
+                    dispatch(inputTodoChange(event.target.value));
+                }}
                 sx={{ p: '10px'}}
                 size='small'
             />
@@ -28,7 +30,7 @@ const AddTodo = () => {
                 variant="outlined"
                 size='small'
                 sx={{height: '30px'}}
-                onClick={()=>dispatch(addTodo)}
+                onClick={()=>dispatch(addTodo())}
             >
                 Добавить
             </Button>

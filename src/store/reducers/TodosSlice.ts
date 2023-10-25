@@ -14,8 +14,8 @@ interface TodosState {
 
 const initialState: TodosState = {
     todos: [
-        {id: 0, name: "first", isCompleted: true, show: true},
-        {id: 1, name: "second", isCompleted: false, show: true},
+        {id: 'sdfgd', name: "first", isCompleted: true, show: true},
+        {id: 'dsfhdghf', name: "second", isCompleted: false, show: true},
     ],
     inputTodoValue: '',
     isLoading: false,
@@ -29,17 +29,17 @@ export const todosSlice = createSlice({
     initialState: initialState,
     reducers: {
         addTodo: {
-            reducer: (state, action: PayloadAction<number>) => {
+            reducer: (state, action: PayloadAction<string>) => {
                 state.todos.push({
                     id: action.payload,
                     isCompleted: false,
                     name: state.inputTodoValue,
-                    
+                    show: true,
                 });
             },
             prepare: () => {
                 return {
-                    payload: +nanoid(),
+                    payload: nanoid(),
                 }
             }
         },
@@ -56,7 +56,7 @@ export const todosSlice = createSlice({
             );
             if (findedTodo) {
                 findedTodo.isCompleted = !findedTodo.isCompleted;
-                state.itemsLeft = findedTodo.isCompleted ? state.itemsLeft - 1 : state.itemsLeft + 1;
+                state.itemsLeft = findedTodo.isCompleted ? state.itemsLeft + 1 : state.itemsLeft - 1;
             }
         },
 

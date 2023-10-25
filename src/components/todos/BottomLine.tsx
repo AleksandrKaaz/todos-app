@@ -25,7 +25,7 @@ const BottomLine = () => {
                 showLabels
                 value={todos.bottomNavValue}
                 onChange={(event, newValue) => {
-                    bottomNavigationChange(newValue);
+                    dispatch(bottomNavigationChange(newValue));
                 }}
             >
                 <BottomNavigationAction label="All" value={BottomMenuButtons.All} />
@@ -35,7 +35,7 @@ const BottomLine = () => {
             <Button
                 variant="text"
                 sx={{textTransform: 'none', color: 'black'}}
-                onClick={()=>dispatch(clearCompleted)}
+                onClick={()=>dispatch(clearCompleted())}
             >
                 Clear completed
             </Button>
