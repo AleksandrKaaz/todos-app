@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import { BottomMenuButtons } from '../../../enums/BottomMenuButtons';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useActions } from '../../../hooks/useActions';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { bottomNavigationChange, clearCompleted } from '../../store/reducers/TodosSlice';
+import { BottomMenuButtons } from '../../enums/BottomMenuButtons';
 
 const BottomLine = () => {
-    const { bottomNavigationChange, clearCompleted } = useActions();
-    const { bottomNavValue, itemsLeft } = useTypedSelector(state => state.todo);
+    const todos = useAppSelector(state => state.todos)
+    const dispatch = useAppDispatch();
 
     return (
         <Box
@@ -20,10 +20,10 @@ const BottomLine = () => {
             justifyContent={'space-around'}
             alignItems={'center'}
         >
-            <Typography>{itemsLeft} items left</Typography>
+            <Typography>{todos.itemsLeft} items left</Typography>
             <BottomNavigation
                 showLabels
-                value={bottomNavValue}
+                value={todos.bottomNavValue}
                 onChange={(event, newValue) => {
                     bottomNavigationChange(newValue);
                 }}
@@ -35,7 +35,7 @@ const BottomLine = () => {
             <Button
                 variant="text"
                 sx={{textTransform: 'none', color: 'black'}}
-                onClick={clearCompleted}
+                onClick={()=>dispatch(clearCompleted)}
             >
                 Clear completed
             </Button>

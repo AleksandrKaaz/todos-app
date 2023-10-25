@@ -5,19 +5,19 @@ import ListItemText from '@mui/material/ListItemText';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useActions } from '../../../hooks/useActions';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { switchComplete } from '../../store/reducers/TodosSlice';
 
 const TodosList = () => {
-    const { switchComplete } = useActions();
-    const { todos } = useTypedSelector(state => state.todo);
+    const todos = useAppSelector(state => state.todos.todos)
+    const dispatch = useAppDispatch();
 
     return (
         <List sx={{width: '100%', borderTop: '1px dotted'}}>
             {todos.map(todo => todo.show &&
-                <ListItem sx={{borderBottom: '1px solid'}} key={todo.name} disablePadding>
+                <ListItem sx={{borderBottom: '1px solid'}} key={todo.id} disablePadding>
                     <ListItemButton
-                        onClick={()=> switchComplete(todo.name)}
+                        onClick={()=> dispatch(switchComplete(todo.name))}
                     >
                         <ListItemIcon>
                             {

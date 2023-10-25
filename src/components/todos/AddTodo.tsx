@@ -1,12 +1,13 @@
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useActions } from '../../../hooks/useActions';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { addTodo, inputTodoChange } from '../../store/reducers/TodosSlice';
+
 
 const AddTodo = () => {
-    const { addTodo, inputTodoChange } = useActions();
-    const { inputTodoValue } = useTypedSelector(state => state.todo);
+    const todos = useAppSelector(state => state.todos)
+    const dispatch = useAppDispatch();
 
   return (
     <>
@@ -18,8 +19,8 @@ const AddTodo = () => {
         >
             <TextField
                 placeholder="type todo name"
-                value={inputTodoValue}
-                onChange={inputTodoChange}
+                value={todos.inputTodoValue}
+                onChange={()=>dispatch(inputTodoChange)}
                 sx={{ p: '10px'}}
                 size='small'
             />
@@ -27,7 +28,7 @@ const AddTodo = () => {
                 variant="outlined"
                 size='small'
                 sx={{height: '30px'}}
-                onClick={addTodo}
+                onClick={()=>dispatch(addTodo)}
             >
                 Добавить
             </Button>
